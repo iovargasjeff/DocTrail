@@ -1,0 +1,63 @@
+# Copy this file only when a durable project profile will help future decisions.
+# Before delivery, remove fields and comments that have no current purpose.
+# Use null only for important unknowns; do not invent values or live execution state.
+# Omit the planning fields entirely when planning was not assessed.
+# Adapt language and names to the destination repository unless a consumer requires this schema.
+
+project:
+  name: null
+  stage: null # prototype | mvp | product | growth | mature
+  lifespan: null # disposable | short | long-term
+  purpose: null # personal | internal | educational | experimental | public | commercial
+
+team:
+  size: null
+  experience: null
+  parallel_work: null
+  ownership_model: null
+
+product:
+  audience: null # single-user | small-team | organization | customers | public
+  success_criteria: []
+  domain_complexity: null # low | medium | high, with rationale in project docs
+  expected_scale: null # include load shape, not only user count
+  availability_requirements: null
+
+technical:
+  distribution: null # local | self-hosted | private-cloud | public-cloud
+  external_integrations: []
+  async_processing: null
+  realtime: null
+  deployment_complexity: null
+  sensitive_data: null
+
+risk:
+  security: null
+  privacy: null
+  financial: null
+  regulatory: null
+  availability: null
+  irreversible_operations: null
+
+delivery:
+  sequencing_needed: null
+  external_deadline: null
+  external_dependencies: []
+  release_constraints: []
+
+profiles:
+  documentation: null # lean | standard | rigorous
+  architecture: null # lean | standard | rigorous
+  assurance: null # lean | standard | rigorous
+  planning: null # omit if not assessed; otherwise none | lean | standard | rigorous
+
+guidance:
+  audience: null # technical | learner | mixed
+  explanation_depth: null # concise | balanced | educational
+  planning_preference: null # not-assessed | declined | not-needed | requested | recommended
+  planning_format: null # next-steps | phases | now-next-later | capability-sequence | milestones | release-gates
+  scope_policy: null # recommend | include-all | preserve-only
+
+assumptions: []
+unknowns: []
+revisit_triggers: []
