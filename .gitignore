@@ -1,0 +1,6 @@
+node_modules/
+__pycache__/
+*.py[cod]
+*.tgz
+.DS_Store
+Thumbs.db

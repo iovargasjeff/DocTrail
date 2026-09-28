@@ -266,13 +266,46 @@ recommended, and future ideas separate. Do not invent dates or owners.
 
 DocTrail is both the product and the primary skill. The installable skill directory is `doctrail/`; its short description is project architecture and documentation. Always copy the complete directory so its references, templates, scripts, and assets stay together.
 
-#### Quick install with the Agent Skills CLI
+### Primary: DocTrail npm CLI
+
+```bash
+npx --yes @iovargasjeff/doctrail@latest
+```
+
+This installs DocTrail into the current project using the official Agent Skills CLI underneath. Add `--global` for a user-wide install or select a host with `--agent`:
+
+```bash
+npx --yes @iovargasjeff/doctrail@latest install --global --agent codex
+```
+
+The npm package is prepared here but is **not published yet**. The first public release is a one-time authenticated `v0.1.0` publish; see [the release guide](docs/releasing.md). After that initial release, the command above is the primary installation route.
+
+The bundled commands are:
+
+| Command | Purpose |
+|---|---|
+| `install` (default) | Install the bundled skill. Repeated installs are no-ops; existing unmanaged or modified copies are not silently replaced. |
+| `scan [path] --format markdown or json` | Read-only repository inventory; requires Python 3.11+. |
+| `doctor` | Check Node/Python runtimes, skill installation, recorded integrity, and version drift. |
+| `update` | Explicitly update DocTrail from the CLI package version currently being run. |
+| `uninstall` | Remove only the `doctrail` skill in the selected scope. |
+
+```bash
+npx --yes @iovargasjeff/doctrail@latest scan . --format json
+npx --yes @iovargasjeff/doctrail@latest doctor
+npx --yes @iovargasjeff/doctrail@latest update
+npx --yes @iovargasjeff/doctrail@latest uninstall
+```
+
+The CLI requires Node.js 22.20 or newer. Python 3.11 or newer is needed only by `scan` (set `DOCTRAIL_PYTHON` to choose a specific executable). Update and removal check the installed skill's integrity; when local changes are detected, an interactive confirmation is required, or pass `--force` after reviewing them. New npm releases do not update installed copies automatically; each user chooses when to run `update`. DocTrail collects no telemetry and disables telemetry in the upstream installer it invokes.
+
+### Alternative: use the generic Agent Skills CLI directly
 
 ```bash
 npx skills add iovargasjeff/DocTrail@doctrail
 ```
 
-This fetches the skill from GitHub through the generic `skills` npm CLI; it does not publish DocTrail as an npm package. See [issue #9](https://github.com/iovargasjeff/DocTrail/issues/9) for the remaining install-scope and host-verification work.
+This installs the skill from GitHub without DocTrail's npm wrapper commands. The generic CLI also supports selecting agents, `skills update doctrail`, and `skills remove doctrail`. See [issue #9](https://github.com/iovargasjeff/DocTrail/issues/9) for cross-host verification work; successful installation alone is not a behavioral compatibility test.
 
 #### Updating from the earlier skill name
 
@@ -381,8 +414,8 @@ doctrail/
 │   ├── delivery-planning.md
 │   └── existing-project-review.md
 ├── assets/                        # Architecture, functional, requirements, quality, and plan templates
-├── scripts/                       # Structural documentation validator
-└── evals/                         # 19 adversarial behavior scenarios
+├── scripts/                       # Documentation validator and read-only repository inventory
+└── evals/                         # 19 adversarial scenario contracts (repository only; not in npm package)
 ```
 
 `SKILL.md` stays focused on shared rules and routing. Detailed guidance is loaded only when the request needs it, keeping unrelated context out of the conversation.
@@ -402,7 +435,7 @@ DocTrail deliberately does **not**:
 
 ## Validation
 
-The package passes the standard Codex skill validator. Its 19 adversarial scenarios cover:
+The skill passes structural validation. Its 19 adversarial scenario contracts cover:
 
 - simple CRUD and accidental overengineering;
 - brownfield repository review;
@@ -422,7 +455,7 @@ The package passes the standard Codex skill validator. Its 19 adversarial scenar
 - feature intake that keeps adjacent recommendations out of accepted scope.
 - explicit route selectors that do not grant permission to edit files.
 
-Run `python doctrail/scripts/validate_docs.py <docs-root>` for structural, link, and identifier checks on the default layout; run `python -m unittest discover -s tests -v` to test the validator. It does not judge whether requirements are true or semantically complete, so review source coverage and evidence manually. The evals judge observable decisions and side effects — not exact wording or a predetermined stack.
+Run `npm run check` for the skill/package checks and test suite, `npm run evals` to validate the 19 scenario contracts, and `python doctrail/scripts/validate_docs.py <docs-root>` for structural, link, and identifier checks on generated documentation. The repository inventory is available with `python doctrail/scripts/repository_inventory.py <repo-root> --format markdown|json`. Automated checks validate structure and deterministic script behavior; they do not run an LLM or prove that requirements are true, semantically complete, or behaviorally compatible with every host. Human review of source coverage and live host-specific evals remains necessary.
 
 ---
 

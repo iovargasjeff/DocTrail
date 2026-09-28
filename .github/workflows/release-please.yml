@@ -1,0 +1,48 @@
+name: Release Please
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  release-please:
+    name: Create or update release PR
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Wait for the one-time v0.1.0 bootstrap release
+        id: bootstrap
+        shell: bash
+        run: |
+          if git show-ref --verify --quiet refs/tags/v0.1.0; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "Release Please is paused until v0.1.0 has been manually published and tagged. See docs/releasing.md."
+          fi
+      - name: Create Release Please GitHub App token
+        if: steps.bootstrap.outputs.ready == 'true'
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ secrets.RELEASE_PLEASE_APP_ID }}
+          private-key: ${{ secrets.RELEASE_PLEASE_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: DocTrail
+      - name: Open or update the release PR
+        if: steps.bootstrap.outputs.ready == 'true'
+        uses: googleapis/release-please-action@v4
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
