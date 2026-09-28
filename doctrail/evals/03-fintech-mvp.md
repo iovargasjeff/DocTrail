@@ -2,7 +2,7 @@
 
 ## Exact prompt
 
-> Usa `$project-architect` para diseñar y documentar la arquitectura y el plan técnico de un MVP que recibirá pagos y registrará movimientos de dinero. Crea `docs/architecture.md` y `docs/delivery.md`. Necesito milestones útiles, pero no inventes fechas.
+> Usa `$doctrail` para diseñar y documentar la arquitectura y el plan técnico de un MVP que recibirá pagos y registrará movimientos de dinero. Crea `docs/architecture.md` y `docs/delivery.md`. Necesito milestones útiles, pero no inventes fechas.
 
 ## Fixture or available context
 

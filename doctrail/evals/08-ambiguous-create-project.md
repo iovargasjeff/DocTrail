@@ -7,13 +7,13 @@
 ## Fixture or available context
 
 - Empty implementation workspace.
-- No explicit invocation of `$project-architect`.
+- No explicit invocation of `$doctrail`.
 - No request for architecture analysis, documentation, ADRs, planning, or agent instructions.
 - The implementation agent otherwise has authority to create application files.
 
 ## Expected mode
 
-- Activation: `project-architect` should not take over solely because implementation begins.
+- Activation: `doctrail` should not take over solely because implementation begins.
 - Mode: `ADVISE` with respect to architecture artifacts if architecture implications are considered internally.
 
 ## Allowed actions

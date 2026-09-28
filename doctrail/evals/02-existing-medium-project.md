@@ -2,7 +2,7 @@
 
 ## Exact prompt
 
-> Usa `$project-architect` para revisar la arquitectura de este repositorio y decirme sus fortalezas, problemas y mejoras prioritarias. Solo analiza: no modifiques archivos.
+> Usa `$doctrail` para revisar la arquitectura de este repositorio y decirme sus fortalezas, problemas y mejoras prioritarias. Solo analiza: no modifiques archivos.
 
 ## Fixture or available context
 

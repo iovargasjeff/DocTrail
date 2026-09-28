@@ -2,7 +2,7 @@
 
 ## Exact prompt
 
-> Usa `$project-architect` para ordenar técnicamente este proyecto en `docs/delivery.md`. Trabajamos con Kanban y no queremos milestones ni sprints. Organiza lo aceptado y conserva las ideas posteriores sin convertirlas en compromisos.
+> Usa `$doctrail` para ordenar técnicamente este proyecto en `docs/delivery.md`. Trabajamos con Kanban y no queremos milestones ni sprints. Organiza lo aceptado y conserva las ideas posteriores sin convertirlas en compromisos.
 
 ## Fixture or available context
 

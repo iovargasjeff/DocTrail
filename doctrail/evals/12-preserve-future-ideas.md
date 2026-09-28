@@ -2,7 +2,7 @@
 
 ## Exact prompt
 
-> Usa `$project-architect` para actualizar `docs/delivery.md` y `docs/future-capabilities.md`. Debemos entregar primero el flujo principal, pero quiero conservar todas mis ideas: algunas son obligatorias, otras solo recomendadas y otras quizá sean para mucho después. No elimines las que no recomiendes; explica los conflictos y ordénalas sin prometer que todas se harán.
+> Usa `$doctrail` para actualizar `docs/delivery.md` y `docs/future-capabilities.md`. Debemos entregar primero el flujo principal, pero quiero conservar todas mis ideas: algunas son obligatorias, otras solo recomendadas y otras quizá sean para mucho después. No elimines las que no recomiendes; explica los conflictos y ordénalas sin prometer que todas se harán.
 
 ## Fixture or available context
 

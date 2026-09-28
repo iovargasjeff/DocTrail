@@ -2,7 +2,7 @@
 
 ## Exact prompt
 
-> Usa `$project-architect` para revisar si este proyecto está sobrearquitecturado. Quiero evidencia y opciones de simplificación, no cambios en el código.
+> Usa `$doctrail` para revisar si este proyecto está sobrearquitecturado. Quiero evidencia y opciones de simplificación, no cambios en el código.
 
 ## Fixture or available context
 

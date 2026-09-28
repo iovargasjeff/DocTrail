@@ -1,0 +1,4 @@
+interface:
+  display_name: "DocTrail"
+  short_description: "Project architecture and documentation workflows"
+  default_prompt: "Use $doctrail to assess or document this project with concise, traceable requirements and right-sized architecture."

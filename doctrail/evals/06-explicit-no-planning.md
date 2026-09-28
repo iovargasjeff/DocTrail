@@ -2,7 +2,7 @@
 
 ## Exact prompt
 
-> Usa `$project-architect` para recomendar la arquitectura de este portal de salud. No quiero roadmap, fases ni milestones; limita la respuesta a arquitectura, riesgos y decisiones técnicas.
+> Usa `$doctrail` para recomendar la arquitectura de este portal de salud. No quiero roadmap, fases ni milestones; limita la respuesta a arquitectura, riesgos y decisiones técnicas.
 
 ## Fixture or available context
 

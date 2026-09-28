@@ -2,7 +2,7 @@
 
 ## Exact prompt
 
-> Usa `$project-architect` para decidir cómo agregar devoluciones y reembolsos a este sistema de pedidos. Analiza dónde encaja la capability y los cambios arquitectónicos necesarios. No escribas archivos todavía.
+> Usa `$doctrail` para decidir cómo agregar devoluciones y reembolsos a este sistema de pedidos. Analiza dónde encaja la capability y los cambios arquitectónicos necesarios. No escribas archivos todavía.
 
 ## Fixture or available context
 
