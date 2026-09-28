@@ -159,6 +159,7 @@ test("packed npm artifact installs and runs without repository-only files", { ti
   assert.equal(install.status, 0, `${install.stdout}\n${install.stderr}`);
   const doctor = runPackaged(["doctor", "--json"]);
   assert.equal(doctor.status, 0, doctor.stderr);
+  assert.ok(doctor.stdout.trim(), `doctor --json emitted no report. stderr: ${doctor.stderr}`);
   assert.equal(JSON.parse(doctor.stdout).installations[0].integrity, "ok");
   const update = runPackaged(["update", "--agent", "codex"]);
   assert.equal(update.status, 0, `${update.stdout}\n${update.stderr}`);
