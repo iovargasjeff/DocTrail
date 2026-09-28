@@ -21,7 +21,7 @@
 
 <br />
 
-<sub><strong>Agent Skills compatible</strong> · ✓ Validated on Codex · 12 adversarial evals</sub>
+<sub><strong>Agent Skills compatible</strong> · ✓ Validated on Codex · 16 adversarial evals</sub>
 
 [Why DocTrail](#why-doctrail) · [How it works](#how-it-works) · [Compare](#how-it-compares) · [Install](#installation) · [Try it](#try-it)
 
@@ -136,15 +136,20 @@ DocTrail starts in **advisory mode**. It writes files only when you explicitly r
 
 | Artifact | What it preserves | When it is useful |
 |---|---|---|
+| Core documentation areas | Context, functionality, architecture, and quality/operations, with three concise visual views | Whenever a complete project-documentation set is requested; concise even for a small project |
+| Requirements and traceability | Stable RF/RNF/business-rule IDs, source disposition, acceptance, verification, and links across stories, design, and tests | For every complete baseline; depth grows with risk and complexity, not verbosity |
+| Stories and use cases | Brief user stories per capability; detailed use cases for flows with real rules, alternatives, failures, or risk | To explain user intent and important interactions without repeating conventional behavior |
 | Project profile | Purpose, audience, constraints, risk, assumptions | When future decisions need stable context |
-| Architecture document | Boundaries, building blocks, data, integrations, runtime and deployment | When the system needs a shared structural model |
-| ADR | A significant decision, its alternatives, consequences, and revisit trigger | When future contributors may question or reverse the choice |
-| Documentation index | Navigation across real project documents | When documentation is no longer obvious to discover |
+| Architecture detail | The required overview includes system boundaries and the baseline C4 context view; expand into building blocks, data, integrations, runtime, and deployment as warranted | When additional structure or risk needs a durable shared model |
+| ADR | A significant decision, its alternatives, consequences, and revisit trigger; stored under `docs/02-arquitectura/adr/` by default | When future contributors may question or reverse the choice |
+| Documentation index | Navigation across the core areas and other project documents; `docs/indice.md` is the default root index | As the root entry point for a complete documentation baseline |
 | `AGENTS.md` guidance | Short instructions telling future agents what existing docs to consult | When agent behavior should consistently respect project context |
 | Delivery direction | Outcomes, dependencies, risks, gates, and optional milestones | When sequencing adds value |
 | Future capabilities | Ideas worth preserving without promising delivery | When possibilities outgrow a small roadmap section |
 
-No empty documentation tree. No ADR for a trivial preference. No `AGENTS.md` rewrite. No roadmap just because the project exists.
+No empty placeholders. A complete documentation set has four concise core areas and requirement identifiers; planning remains optional. No ADR for a trivial preference. No `AGENTS.md` rewrite. No roadmap just because the project exists.
+
+For a complete baseline, each functional requirement (`RF`) and non-functional requirement (`RNF`) has a source, scope decision, acceptance or quality target, and verification method. A short user story captures each meaningful user-facing capability; detailed use cases are reserved for flows with real rules, alternatives, failures, or risk. A conventional login does not need a long scripted use case. A compact traceability map lets an agent follow a capability into its design and tests without repeating its full explanation.
 
 ## How it compares
 
@@ -207,6 +212,8 @@ Planning can be:
 - recommended because sequencing would reduce risk.
 
 When useful, DocTrail can organize work as next steps, phases, Now/Next/Later, capability sequences, outcome milestones, or release gates. It does not impose Scrum, backend-first, frontend-first, or a fixed hierarchy.
+
+For a complete documentation baseline, the four core areas are created regardless of planning preference. If that preference is unknown, DocTrail asks whether to omit planning, keep a Markdown plan in the repository, or use an existing issues/board system; it can continue with the core baseline while awaiting the answer. It does not duplicate live issue status in Markdown, and milestones remain optional.
 
 A thin end-to-end walking skeleton is preferred when it produces earlier learning. Backend-first, UI-first, infrastructure-first, or a technical spike can still be correct when the project's main uncertainty points there.
 
@@ -335,7 +342,7 @@ Claude Code and Cursor expose installed skills through `/project-architect`. Acr
 Use the project-architect skill to review this project's architecture.
 ```
 
-Hosts may select it automatically for architecture assessment, technical decisions, repository reviews, architecture documentation, and technical delivery planning. It should not activate merely because ordinary implementation begins.
+Hosts may select it automatically for architecture assessment, technical decisions, repository reviews, requirements-led project documentation, feature fit, and technical delivery planning. It should not activate merely because ordinary implementation begins.
 
 ## Inside the skill
 
@@ -351,10 +358,12 @@ project-architect/
 │   ├── c4-arc42.md
 │   ├── adr-guidelines.md
 │   ├── documentation-strategy.md
+│   ├── requirements-engineering.md
 │   ├── delivery-planning.md
 │   └── existing-project-review.md
-├── assets/                        # Adaptable output templates
-└── evals/                         # 12 adversarial behavior scenarios
+├── assets/                        # Architecture, functional, requirements, quality, and plan templates
+├── scripts/                       # Structural documentation validator
+└── evals/                         # 18 adversarial behavior scenarios
 ```
 
 `SKILL.md` stays focused on shared rules and routing. Detailed guidance is loaded only when the request needs it, keeping unrelated context out of the conversation.
@@ -365,7 +374,7 @@ DocTrail deliberately does **not**:
 
 - activate only because you started building something;
 - write architecture artifacts without explicit authorization;
-- force microservices, DDD, CQRS, C4, arc42, roadmaps, or milestones;
+- force detailed C4 levels (containers/components/deployment), full arc42 coverage, roadmaps, or milestones; a complete baseline does include a minimal C4 context plus functional use-case and primary-sequence views;
 - treat a personal tool like a public startup;
 - erase ideas because they are not recommended now;
 - turn durable documentation into a mirror of live tickets;
@@ -374,7 +383,7 @@ DocTrail deliberately does **not**:
 
 ## Validation
 
-The package passes the standard Codex skill validator. Its 12 adversarial scenarios cover:
+The package passes the standard Codex skill validator. Its 18 adversarial scenarios cover:
 
 - simple CRUD and accidental overengineering;
 - brownfield repository review;
@@ -385,9 +394,15 @@ The package passes the standard Codex skill validator. Its 12 adversarial scenar
 - ambiguous authorization;
 - external roadmaps;
 - personal-use applications;
-- preservation of future ideas.
+- preservation of future ideas;
+- the required small-project documentation baseline with planning left optional;
+- proceeding with core documentation while the optional planning choice is pending;
+- required diagrams and an AI navigation pointer without rewriting existing agent instructions;
+- proportional growth of documentation for a larger multi-unit product;
+- concise requirements and user stories without verbose conventional login use cases;
+- feature intake that keeps adjacent recommendations out of accepted scope.
 
-The evals judge observable decisions and side effects — not exact wording or a predetermined stack.
+Run `python project-architect/scripts/validate_docs.py <docs-root>` for structural, link, and identifier checks on the default layout; run `python -m unittest discover -s tests -v` to test the validator. It does not judge whether requirements are true or semantically complete, so review source coverage and evidence manually. The evals judge observable decisions and side effects — not exact wording or a predetermined stack.
 
 ---
 

@@ -1,61 +1,35 @@
-# Project documentation
+# Índice de documentación del proyecto
 
 <!--
-Use an index only when multiple documents or locations need navigation.
-Keep only existing links and useful sections. Follow repository language and naming.
-Do not list planned files as though they already exist.
-Before delivery, remove template comments, example rows, and empty categories.
-Do not invent document status, ownership, review dates, or authority.
+Use this as `docs/indice.md` for a complete project-documentation baseline.
+Create concise, substantive area index pages for all four core areas in the same
+materialization. Keep the planning section only when the user opts in. If a
+repository already has a useful index, adapt it without maintaining two competing
+indexes. Rename or remove an existing index only when the user authorizes that change.
+Before delivery, remove comments and any optional section with no real content.
 -->
 
-## How to use this documentation
+## Cómo usar esta documentación
 
-<!-- State the intended audience, what this index covers, and where live execution state is maintained. -->
+<!-- Indica audiencia, alcance y dónde se mantiene el estado vivo de ejecución. -->
 
-## Context and scope
+## Áreas base
 
-| Document | Purpose | Represents |
+| Área | Contenido | Índice |
 |---|---|---|
-| [<!-- title -->](<!-- verified path -->) |  | Current state / Accepted target / Proposal / History |
+| Contexto | Propósito, usuarios, alcance, restricciones e incógnitas relevantes. | [00-contexto](00-contexto/indice.md) |
+| Funcional | Inventario de capacidades, RF/RNF, reglas, historias, casos de uso relevantes, dominio y secuencia principal. | [01-funcional](01-funcional/indice.md) |
+| Arquitectura | Límites actuales/objetivo, contexto C4, stack, datos e integraciones. | [02-arquitectura](02-arquitectura/indice.md) |
+| Calidad y operación | Verificación trazada, ejecución y despliegue/hosting actual o aún no decidido; enlaza los RNF canónicos del área funcional. | [04-calidad-operacion](04-calidad-operacion/indice.md) |
 
-## Functional and domain knowledge
+## Planificación (opcional)
 
-| Document | Purpose | Represents |
-|---|---|---|
-| [<!-- title -->](<!-- verified path -->) |  |  |
+<!-- Incluye solo si el usuario quiere plan local o un índice al issue tracker/tablero. -->
 
-## Architecture and decisions
+<!-- [Plan o tracker](03-planificacion/indice.md) — indica qué sistema tiene la autoridad. -->
 
-| Document | Purpose | Represents |
-|---|---|---|
-| [<!-- architecture -->](<!-- verified path -->) |  |  |
-| [<!-- ADR index or decision -->](<!-- verified path -->) |  |  |
+## Navegación y autoridad
 
-## Feature documentation
-
-<!-- Include only features whose complexity warrants focused documentation. -->
-
-| Feature | Documents | Notes |
-|---|---|---|
-|  |  |  |
-
-## Delivery direction
-
-<!-- Include only when planning was requested and materialized. Link the external roadmap instead of duplicating it when another system is authoritative. -->
-
-| Document or system | Purpose | Authority boundary |
-|---|---|---|
-|  |  | Durable direction / Live execution |
-
-## Quality and operations
-
-| Document | Purpose | Represents |
-|---|---|---|
-| [<!-- title -->](<!-- verified path -->) |  |  |
-
-## Documentation conventions
-
-- Documentation preserves durable intent, accepted design, rationale, and delivery direction.
-- Code represents current implementation; tests and CI provide executable evidence.
-- Investigate disagreement among these sources instead of assuming one automatically wins.
-- Keep assignments, dates, progress, and live priority in the project's execution system.
+- El código representa la implementación actual; pruebas/CI son evidencia solo de lo que cubren.
+- Las decisiones arquitectónicas significativas se registran como ADR bajo `02-arquitectura/adr/` cuando existan.
+- El estado de ejecución en vivo permanece en su sistema de seguimiento y no se duplica aquí.

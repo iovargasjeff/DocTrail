@@ -31,12 +31,12 @@ In `ADVISE`, say whether an ADR is warranted and provide its proposed subject, s
 In `MATERIALIZE`:
 
 1. read repository instructions and existing decision conventions;
-2. inspect the ADR directory, index, filenames, numbering, statuses, and links;
+2. inspect the existing ADR location, filenames, numbering, statuses, and links;
 3. use the repository's language and format when an established convention is adequate;
 4. create or change only the specifically authorized decision artifacts;
 5. update an existing index only when it exists or its creation was accepted.
 
-Do not create an ADR directory, index, or template merely to satisfy this skill's preferred shape.
+When using this skill's documentation baseline and the repository has no ADR convention, place materialized ADRs under `docs/02-arquitectura/adr/`. Create that subdirectory only when the first warranted and authorized ADR is materialized; do not create an empty ADR directory or a separate index/template without a navigation need. If a repository already has an established ADR location, preserve it and link it from the architecture index instead of creating a competing location.
 
 ## ADR content contract
 

@@ -11,7 +11,15 @@
 
 ## Context
 
-<!-- Describe the problem, users, system boundary, and relevant external systems. Add a C4 context view only if it clarifies these relationships. -->
+<!-- For a complete documentation baseline, include a concise C4 system-context view here even for a small system. Use real actors/callers and confirmed external systems only. Use C4Context only when the target renderer supports it; otherwise use its supported flowchart syntax while preserving the same system boundary and relationships. Put the view's status (observed current, accepted target, proposed, or partly unverified) in its title/caption or adjacent prose; explain a genuine exception instead of silently omitting the view. -->
+
+```mermaid
+C4Context
+    title System context — replace with the project name
+    Person(actor, "Real user or caller", "Confirmed role")
+    System(system, "System name", "Confirmed purpose")
+    Rel(actor, system, "Uses or invokes")
+```
 
 ## Goals
 
@@ -86,7 +94,7 @@
 
 ## Runtime flows
 
-<!-- Document only important flows with meaningful ordering, async behavior, trust changes, retries, or failure semantics. -->
+<!-- The primary-use-case sequence belongs in the functional overview. Add architecture-level flows here only when they explain cross-cutting ordering, async behavior, trust changes, retries, or failure semantics. -->
 
 ### Flow: <!-- name -->
 

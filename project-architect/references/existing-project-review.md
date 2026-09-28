@@ -17,6 +17,18 @@ Operate in `ADVISE` unless the user explicitly authorizes changes. Repository re
 
 Do not silently turn an architecture review into a security audit, performance benchmark, dependency upgrade, or comprehensive code review. Surface material signals, state the limit, and recommend specialized follow-up when necessary.
 
+## Keep feature investigations focused
+
+When `FEATURE` concerns an existing repository, use a smaller boundary than a whole-system review unless the change demonstrably crosses system-wide concerns:
+
+1. Translate the requested behavior into domain terms, synonyms, and likely entry points.
+2. Search relevant source, specs, active changes, and tests. Follow callers and dependencies far enough to understand the current end-to-end behavior; do not infer ownership from directory names alone.
+3. Compare nearby capabilities and shared rules to identify what should be reused, extended, or kept separate.
+4. Check relevant validation, authorization, data ownership, transactions, integrations, and tests when the feature touches them.
+5. Report a compact evidence map: current behavior, source paths, reusable logic, genuine gaps, and unverified areas. Distinguish implementation from documented intent and accepted target state.
+
+Use focused searches such as `rg -n` with domain terms, aliases, and related symbols, then inspect the matches and their call paths. Expand the boundary only when evidence shows a cross-cutting change or a significant risk. A failed search is not, by itself, evidence that no related behavior exists. If the repository or source files are unavailable, say so and base conclusions only on the supplied context.
+
 ## Inspect from authority to implementation
 
 Adapt this base order to repository structure and the review question:
@@ -51,6 +63,8 @@ Areas not inspected or inaccessible
 ```
 
 Run tests or diagnostic commands only when they are relevant, reasonably safe, and proportionate to the request. Do not imply that reading test files means tests passed. Report commands that were not run and why when that affects confidence.
+
+For `DOCS` or a `FEATURE` that changes product behavior, inspect the relevant functional inventory and verification evidence as well as architecture material. Compare source capabilities, accepted requirements/stories/use cases, implementation paths, tests, active changes, and operations only to the scope needed. Distinguish “not found in this bounded search” from “does not exist.” Record uncovered source items as open/disposition-needed rather than omitting them.
 
 When a claim depends on current framework support, vendor behavior, security status, licensing, or platform limits, verify authoritative current sources if allowed. Repository evidence alone may only establish what the project declares or currently uses.
 

@@ -46,7 +46,7 @@ delivery:
   release_constraints: []
 
 profiles:
-  documentation: null # lean | standard | rigorous
+  documentation: null # depth within the mandatory requirements-led four-area baseline: lean | standard | rigorous
   architecture: null # lean | standard | rigorous
   assurance: null # lean | standard | rigorous
   planning: null # omit if not assessed; otherwise none | lean | standard | rigorous
@@ -56,6 +56,7 @@ guidance:
   explanation_depth: null # concise | balanced | educational
   planning_preference: null # not-assessed | declined | not-needed | requested | recommended
   planning_format: null # next-steps | phases | now-next-later | capability-sequence | milestones | release-gates
+  planning_location: null # repository-markdown | issue-tracker | not-decided; ask when planning is wanted and unclear
   scope_policy: null # recommend | include-all | preserve-only
 
 assumptions: []

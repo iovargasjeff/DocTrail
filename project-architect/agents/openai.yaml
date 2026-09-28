@@ -1,4 +1,4 @@
 interface:
   display_name: "Project Architect"
-  short_description: "Right-sized software architecture guidance"
-  default_prompt: "Use $project-architect to assess this project and recommend right-sized architecture and documentation."
+  short_description: "Requirements-led project architecture and documentation"
+  default_prompt: "Use $project-architect to assess or document this project with concise, traceable requirements and right-sized architecture."

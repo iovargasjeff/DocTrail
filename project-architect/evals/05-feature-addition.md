@@ -25,6 +25,9 @@
 
 ## Required behaviors
 
+- Before recommending placement, inspect the relevant existing feature paths, accepted decisions/specs, and tests when repository files are available; cite the evidence and keep the search scoped to refunds and adjacent order/payment flows.
+- Distinguish implementation evidence from the fixture's documented context. If only the fixture is available, state that the current code was not verified.
+- Keep the requested refund capability distinct from adjacent recommendations; do not add those recommendations to accepted scope or create artifacts for them in this advice-only scenario.
 - Fit the capability into existing architecture before proposing a new subsystem.
 - Reuse suitable worker or outbox mechanisms when evidence supports them.
 - Address idempotency, provider failure, order/payment consistency, and audit needs.
@@ -45,6 +48,7 @@
 
 - The recommendation names an existing or justified new owner for the capability.
 - Interactions and failure semantics are compatible with existing mechanisms.
+- If a materialization were authorized later, identify the affected RF/RNF, story/use case where useful, and verification links without duplicating their canonical definitions.
 - Any rollout guidance is feature-scoped and risk-driven.
 - No global planning or repository modification occurs.
 

@@ -2,9 +2,21 @@
 
 Use C4 to communicate selected views and arc42 to check whether important architectural questions were considered. Neither requires a fixed document set.
 
+## Visual baseline for complete documentation
+
+For a complete software-documentation baseline, include these three concise, editable views in the relevant area overview pages, regardless of the `Lean`, `Standard`, or `Rigorous` depth profile:
+
+1. **C4 system context** in the architecture area: the system boundary, meaningful actors/callers, and external systems.
+2. **Use-case view** in the functional area: actors and the system capabilities they invoke.
+3. **Primary-use-case sequence** in the functional area: the important participants and their interactions in order.
+
+These views answer different questions; none substitutes for the others. Use the repository's established diagram format and verify that the target renderer supports the chosen syntax when possible. If no format is established, prefer editable Mermaid in Markdown using widely supported syntax. Use Mermaid `C4Context` or `usecase-beta` only when the target renderer supports them; otherwise preserve the same C4-context or actor-to-use-case semantics in a supported `flowchart`. Use `sequenceDiagram` for the primary sequence where supported. Do not add a renderer dependency just for these baseline views. For a flow that cannot be represented accurately as a sequence, use the closest truthful flow view and briefly state why a sequence does not apply. Keep the diagrams small, put current/target/proposed/partly-unverified status in the title, caption, or adjacent prose, and add a short explanation so the documentation remains understandable in source view and to assistive technology.
+
+This minimum applies only to a complete software-documentation request. A focused file request, explicit diagram opt-out, or genuinely non-interactive system may narrow it; document the reason instead of silently omitting a required view. Do not invent actors, components, integrations, or behavior to complete a diagram.
+
 ## Decide whether a diagram is useful
 
-Create a diagram only when it clarifies a relationship, boundary, runtime interaction, or deployment fact that prose or a small table would communicate poorly.
+Beyond the required visual baseline above, create an additional diagram only when it clarifies a relationship, boundary, runtime interaction, or deployment fact that prose or a small table would communicate poorly.
 
 Before creating one, answer:
 
@@ -28,7 +40,7 @@ Use when:
 - system scope is misunderstood;
 - trust, ownership, or integration boundaries need a shared view.
 
-Omit when the project is a tiny isolated tool and the same information is obvious in one sentence.
+For a complete baseline, use a minimal context view even for a small isolated tool (for example, its user or caller and the system). Omit it only when the artifact has no meaningful system boundary or actor; explain that exception and provide an appropriate alternative if possible.
 
 Include:
 
@@ -70,7 +82,7 @@ Avoid component diagrams for simple CRUD containers or when the view would merel
 
 ### Dynamic or sequence view
 
-Use for an important runtime flow with meaningful ordering, failures, async boundaries, retries, or trust changes.
+Use the required primary-use-case sequence for the complete baseline. Add further dynamic/sequence views only for important flows with meaningful ordering, failures, async boundaries, retries, or trust changes.
 
 Typical examples:
 
@@ -138,7 +150,7 @@ Questions:
 - Which external systems and trust boundaries exist?
 - What is in and out of scope?
 
-A C4 context view is useful when relationships are non-trivial.
+For a complete documentation baseline, include the required context view even when relationships are simple; keep it minimal rather than adding unsupported detail.
 
 ### 4. Solution strategy
 
@@ -226,7 +238,7 @@ Create a glossary when domain terms, acronyms, or overloaded words cause real am
 
 ### Lean
 
-Usually one architecture document containing relevant goals, constraints, context, strategy, major blocks, key decisions, risks, and revisit triggers. Add diagrams only when they materially improve understanding.
+Keep the required architecture-area overview concise, with the baseline C4 context view. Add goals, constraints, strategy, blocks, decisions, risks, and revisit triggers only where useful; beyond the baseline view, add diagrams only when they materially improve understanding.
 
 ### Standard
 
@@ -258,5 +270,5 @@ Deliberately omitted detail
 Maintenance owner or trigger
 ```
 
-Do not output all C4 levels or all arc42 topics by default.
+Do not output all C4 levels or all arc42 topics by default. The baseline requires only the C4 system-context view; add container, component, and deployment views when they answer a real project question.
 

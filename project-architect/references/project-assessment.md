@@ -146,9 +146,11 @@ Do not copy another product's scale, infrastructure, or business priorities. Pre
 
 | Profile | Use when | Typical outcome |
 |---|---|---|
-| Lean | Few actors, low handoff cost, simple decisions | One concise architecture document or no durable document. |
-| Standard | Multiple capabilities, contributors, or integrations | Index plus focused architecture, data, integration, and decision documents as needed. |
-| Rigorous | High risk, compliance, complex operations, or costly misunderstandings | Quality scenarios, security, recovery, runtime, deployment, and governance evidence where justified. |
+| Lean | Few capabilities, low handoff cost, reversible decisions | The same four-area baseline with compact RF/RNF registers, stories, trace links, core diagrams, and concise verification/operation notes. |
+| Standard | Multiple capabilities, contributors, integrations, or meaningful change coordination | The same required content, split into focused documents where audiences, ownership, or change cadence benefit. |
+| Rigorous | High risk, compliance, complex operations, or costly misunderstandings | Increase evidence and verification precision; add quality scenarios, threat model, recovery, runtime, deployment, and governance artifacts where justified. |
+
+Documentation depth changes verbosity, evidence, and file splitting; it does not remove the complete-baseline requirements contract. Planning remains an independent optional profile.
 
 ### Architecture
 
