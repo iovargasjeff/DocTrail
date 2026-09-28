@@ -1,0 +1,57 @@
+{
+  "name": "@iovargasjeff/doctrail",
+  "version": "0.1.0",
+  "description": "Portable project architecture and documentation skill with a cross-platform CLI",
+  "type": "module",
+  "bin": {
+    "doctrail": "cli/doctrail.mjs"
+  },
+  "files": [
+    "cli/",
+    "assets/doctrail-banner.png",
+    "CHANGELOG.md",
+    "doctrail/SKILL.md",
+    "doctrail/agents/",
+    "doctrail/references/",
+    "doctrail/assets/",
+    "doctrail/scripts/repository_inventory.py",
+    "doctrail/scripts/validate_docs.py"
+  ],
+  "engines": {
+    "node": ">=22.20.0"
+  },
+  "scripts": {
+    "test": "node --test tests/cli.test.mjs && python -m unittest discover -s tests -p test_*.py -v",
+    "evals": "python doctrail/scripts/validate_evals.py",
+    "check:skill": "node scripts/validate-skill.mjs",
+    "check:package": "node scripts/verify-package.mjs",
+    "check:release-tag": "node scripts/verify-release-tag.mjs",
+    "check": "npm test && npm run evals && npm run check:skill && npm run check:package"
+  },
+  "dependencies": {
+    "skills": "1.7.0"
+  },
+  "devDependencies": {
+    "yaml": "2.8.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iovargasjeff/DocTrail.git"
+  },
+  "homepage": "https://github.com/iovargasjeff/DocTrail#readme",
+  "bugs": {
+    "url": "https://github.com/iovargasjeff/DocTrail/issues"
+  },
+  "keywords": [
+    "agent-skills",
+    "documentation",
+    "architecture",
+    "requirements",
+    "codex",
+    "cli"
+  ]
+}

@@ -125,6 +125,8 @@ When a requested feature is explicitly authorized for implementation, keep the a
 
 Read applicable `AGENTS.md` files, README, existing documentation, manifests, source structure, infrastructure, and tests before inferring architecture. Adapt the order when repository structure requires it.
 
+For a whole-system or broad brownfield review, use the bundled read-only inventory when Python 3.11+ is available: `python doctrail/scripts/repository_inventory.py . --format markdown` (or `python doctrail/scripts/repository_inventory.py . --format json` for structured output). It records bounded filesystem and Git metadata without opening project files; disclose partial scans, configured/default exclusions, errors, and areas not inspected. For a narrow `FEATURE` investigation, skip the full inventory unless the evidence shows cross-cutting impact. If Python is unavailable, use host-native repository tools and say so. Inventory counts and names are navigation signals, never architecture-quality verdicts.
+
 Represent findings with independent dimensions:
 
 ```text

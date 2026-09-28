@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: Tests (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22.20.0
+          cache: npm
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+      - run: npm ci
+      - run: npm run check
+
+  required:
+    name: Required
+    if: ${{ always() }}
+    needs:
+      - tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require the cross-platform test matrix
+        env:
+          MATRIX_RESULT: ${{ needs.tests.result }}
+        run: |
+          if [ "$MATRIX_RESULT" != "success" ]; then
+            echo "Cross-platform test matrix result: $MATRIX_RESULT"
+            exit 1
+          fi

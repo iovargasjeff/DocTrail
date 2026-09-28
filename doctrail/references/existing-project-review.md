@@ -48,6 +48,19 @@ Do not treat the order as a checklist requiring exhaustive reading. Start broad 
 
 For large repositories, identify the workspace layout and applicable instructions first, then constrain inspection by subsystem, dependency direction, or representative flow. Report the sampling boundary.
 
+## Use a bounded structural inventory
+
+For a whole-system or broad brownfield review, run the bundled helper when Python 3.11+ is available:
+
+```bash
+python doctrail/scripts/repository_inventory.py . --format markdown
+python doctrail/scripts/repository_inventory.py . --format json
+```
+
+The helper uses only the Python standard library, reads filesystem metadata but never opens repository files, omits sensitive names and common generated/dependency areas, does not follow symbolic links, and bounds depth, file/directory counts, entries retained per directory, error detail, and large-file reporting. It reports likely manifests, entrypoints, tests, CI, infrastructure, documentation, ADRs, language extensions, large/generated areas, and basic Git state. Tune `--max-depth`, `--max-files`, `--max-directories`, `--max-entries-per-directory`, `--max-file-size`, or repeat `--ignore` when the default scope is not appropriate.
+
+The inventory is an orientation aid, not proof that a module exists, is active, or has a particular architecture. Follow important references into manifests, source, tests, deployment, and history. In the review evidence inventory, state the exact command, limits, exclusions, partial-scan reasons, errors, and uninspected areas. A lightweight or narrow feature review may skip it. If the bundled helper cannot run, continue with host-native listing/search tools and record that fallback; do not invent findings from a failed scan.
+
 ## Build an evidence inventory
 
 Record what was actually available and inspected:
@@ -61,6 +74,8 @@ Tests or checks run, with result
 Runtime or production evidence used
 Areas not inspected or inaccessible
 ```
+
+For a structural scan, include the command and its bounded/ignored areas here; the helper's summary does not replace this evidence record.
 
 Run tests or diagnostic commands only when they are relevant, reasonably safe, and proportionate to the request. Do not imply that reading test files means tests passed. Report commands that were not run and why when that affects confidence.
 
