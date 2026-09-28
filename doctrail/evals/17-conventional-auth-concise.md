@@ -2,7 +2,7 @@
 
 ## Exact prompt
 
-> Usa `$project-architect` para crear documentación base concisa para una app personal pequeña de notas con registro e inicio de sesión estándar por correo/contraseña. Quiero requisitos identificables, historias de usuario y criterios verificables. No agregues MFA, invitaciones, roles de empresa ni recuperación por teléfono: no forman parte de esta app. No quiero roadmap.
+> Usa `$doctrail` para crear documentación base concisa para una app personal pequeña de notas con registro e inicio de sesión estándar por correo/contraseña. Quiero requisitos identificables, historias de usuario y criterios verificables. No agregues MFA, invitaciones, roles de empresa ni recuperación por teléfono: no forman parte de esta app. No quiero roadmap.
 
 ## Fixture or available context
 

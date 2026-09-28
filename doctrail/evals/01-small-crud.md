@@ -2,7 +2,7 @@
 
 ## Exact prompt
 
-> Usa `$project-architect` para recomendar la arquitectura de una aplicación de inventario. Soy un solo desarrollador, espero unos 500 usuarios y casi todo será crear, consultar, editar y eliminar productos y movimientos. Solo quiero la decisión arquitectónica; no escribas archivos ni hagas un roadmap.
+> Usa `$doctrail` para recomendar la arquitectura de una aplicación de inventario. Soy un solo desarrollador, espero unos 500 usuarios y casi todo será crear, consultar, editar y eliminar productos y movimientos. Solo quiero la decisión arquitectónica; no escribas archivos ni hagas un roadmap.
 
 ## Fixture or available context
 

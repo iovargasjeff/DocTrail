@@ -2,7 +2,7 @@
 
 ## Exact prompt
 
-> Usa `$project-architect` para evaluar la arquitectura de este sistema de control industrial. No quiero milestones, roadmap ni documentos de planificación. Necesito conocer los riesgos y las decisiones técnicas necesarias.
+> Usa `$doctrail` para evaluar la arquitectura de este sistema de control industrial. No quiero milestones, roadmap ni documentos de planificación. Necesito conocer los riesgos y las decisiones técnicas necesarias.
 
 ## Fixture or available context
 

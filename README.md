@@ -21,7 +21,7 @@
 
 <br />
 
-<sub><strong>Agent Skills compatible</strong> · ✓ Validated on Codex · 16 adversarial evals</sub>
+<sub><strong>Agent Skills compatible</strong> · ✓ Validated on Codex · 19 adversarial evals</sub>
 
 [Why DocTrail](#why-doctrail) · [How it works](#how-it-works) · [Compare](#how-it-compares) · [Install](#installation) · [Try it](#try-it)
 
@@ -75,7 +75,7 @@ Those four dimensions are independent. A small financial MVP may need rigorous a
 
 ## How it works
 
-DocTrail chooses an internal route from the request. You do not need to learn subcommands or select a workflow manually.
+DocTrail normally chooses an internal route from the request. Optional selectors let you choose one explicitly without learning a separate command for every workflow.
 
 ```mermaid
 flowchart LR
@@ -85,11 +85,13 @@ flowchart LR
     B -->|REVIEW| D[Reconstruct the system<br/>from repository evidence]
     B -->|DECIDE| E[Compare options,<br/>costs, and trade-offs]
     B -->|FEATURE| F[Fit the capability into<br/>the existing architecture]
+    B -->|DOCS| D2[Build or review a complete<br/>documentation baseline]
 
     C --> G[Right-sized recommendation]
     D --> G
     E --> G
     F --> G
+    D2 --> G
 
     G --> H{Did the user explicitly<br/>request artifacts?}
     H -->|No| I[Advice only<br/>No files changed]
@@ -99,14 +101,19 @@ flowchart LR
     I --> L[Decision remains<br/>with the user]
 ```
 
-### The four routes
+### The five routes
 
-| Route | Use it for | Typical result |
-|---|---|---|
-| `NEW` | A new idea or project | Context profile, proportional architecture, technology guidance |
-| `REVIEW` | An existing repository | Evidence-based architecture reconstruction and prioritized findings |
-| `DECIDE` | A focused technical choice | Recommendation, alternatives, trade-offs, and revisit conditions |
-| `FEATURE` | Adding a capability | Ownership, boundaries, integration path, and architecture implications |
+The main skill is `doctrail`. It normally picks a route automatically. You can optionally pass one selector (`idea`, `review`, `decide`, `docs`, or `feature`) after invoking it to choose a workflow. These are arguments to the single skill—not separate skills or standalone slash commands. A selector does not authorize file changes or override your scope and constraints.
+
+| Route | Optional selector | Use it for | Typical result |
+|---|---|---|---|
+| `NEW` | `idea` | A new idea or project | Context profile, proportional architecture, technology guidance |
+| `REVIEW` | `review` | An existing repository | Evidence-based architecture reconstruction and prioritized findings |
+| `DECIDE` | `decide` | A focused technical choice | Recommendation, alternatives, trade-offs, and revisit conditions |
+| `DOCS` | `docs` | A complete project-documentation baseline | Requirements-led context, functionality, architecture, and quality/operations docs |
+| `FEATURE` | `feature` | Adding a capability | Existing-logic review, ownership, boundaries, integration path, and architecture implications |
+
+Examples: `Use $doctrail docs to document this project` in Codex, or `/doctrail docs` in Claude Code or Cursor.
 
 ## Context that survives the chat
 
@@ -222,14 +229,14 @@ A thin end-to-end walking skeleton is preferred when it produces earlier learnin
 ### Assess a new project
 
 ```text
-Use $project-architect to assess this idea, identify the real constraints,
+Use $doctrail to assess this idea, identify the real constraints,
 and recommend the simplest architecture that fits. Advice only.
 ```
 
 ### Review an existing repository
 
 ```text
-Use $project-architect to reconstruct this repository's architecture.
+Use $doctrail to reconstruct this repository's architecture.
 Separate observed facts, documented intent, inference, and unknowns.
 Do not modify files.
 ```
@@ -237,27 +244,39 @@ Do not modify files.
 ### Make a focused decision
 
 ```text
-Use $project-architect to decide whether this project needs PostgreSQL
+Use $doctrail to decide whether this project needs PostgreSQL
 or whether SQLite is enough. Include trade-offs and revisit triggers.
 ```
 
 ### Add a feature
 
 ```text
-Use $project-architect to decide where refunds belong in the existing
+Use $doctrail to decide where refunds belong in the existing
 architecture before proposing a new service.
 ```
 
 ### Preserve a long-term direction
 
 ```text
-Use $project-architect to create a technical delivery plan. Keep mandatory,
+Use $doctrail to create a technical delivery plan. Keep mandatory,
 recommended, and future ideas separate. Do not invent dates or owners.
 ```
 
 ## Installation
 
-DocTrail is the project; `project-architect/` is the installable skill directory. Always copy the complete directory so its references, templates, and evals stay together.
+DocTrail is both the product and the primary skill. The installable skill directory is `doctrail/`; its short description is project architecture and documentation. Always copy the complete directory so its references, templates, scripts, and assets stay together.
+
+#### Quick install with the Agent Skills CLI
+
+```bash
+npx skills add iovargasjeff/DocTrail@doctrail
+```
+
+This fetches the skill from GitHub through the generic `skills` npm CLI; it does not publish DocTrail as an npm package. See [issue #9](https://github.com/iovargasjeff/DocTrail/issues/9) for the remaining install-scope and host-verification work.
+
+#### Updating from the earlier skill name
+
+The previous release used the skill slug `project-architect`. Remove that old skill directory from each scope where you installed it, then install or copy `doctrail/`. Keeping both directories can make an agent discover two copies of the same skill.
 
 ### 1. Clone DocTrail
 
@@ -274,24 +293,24 @@ One installation in `.agents/skills/` is discovered by **Codex, Cursor, GitHub C
 
 | Scope | Destination |
 |---|---|
-| User | `~/.agents/skills/project-architect/` |
-| Project | `<project>/.agents/skills/project-architect/` |
+| User | `~/.agents/skills/doctrail/` |
+| Project | `<project>/.agents/skills/doctrail/` |
 
 User installation on macOS or Linux:
 
 ```bash
 mkdir -p ~/.agents/skills
-cp -R project-architect ~/.agents/skills/
+cp -R doctrail ~/.agents/skills/
 ```
 
 User installation on Windows PowerShell:
 
 ```powershell
 New-Item -ItemType Directory -Force "$env:USERPROFILE\.agents\skills" | Out-Null
-Copy-Item -Recurse -Force .\project-architect "$env:USERPROFILE\.agents\skills"
+Copy-Item -Recurse -Force .\doctrail "$env:USERPROFILE\.agents\skills"
 ```
 
-For a project-only installation, replace the destination with `.agents/skills/project-architect` inside that repository.
+For a project-only installation, replace the destination with `.agents/skills/doctrail` inside that repository.
 
 #### Claude Code
 
@@ -301,17 +320,17 @@ macOS or Linux:
 
 ```bash
 mkdir -p ~/.claude/skills
-cp -R project-architect ~/.claude/skills/
+cp -R doctrail ~/.claude/skills/
 ```
 
 Windows PowerShell:
 
 ```powershell
 New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\skills" | Out-Null
-Copy-Item -Recurse -Force .\project-architect "$env:USERPROFILE\.claude\skills"
+Copy-Item -Recurse -Force .\doctrail "$env:USERPROFILE\.claude\skills"
 ```
 
-For a project-only installation, use `.claude/skills/project-architect` inside that repository.
+For a project-only installation, use `.claude/skills/doctrail` inside that repository.
 
 #### Native project paths
 
@@ -333,13 +352,13 @@ The shared path is the smallest setup. These documented native locations are als
 Codex supports explicit `$` invocation:
 
 ```text
-Use $project-architect to review this project's architecture.
+Use $doctrail review to review this project's architecture.
 ```
 
-Claude Code and Cursor expose installed skills through `/project-architect`. Across all compatible hosts, a normal request also works:
+Claude Code and Cursor expose installed skills through `/doctrail`. Across all compatible hosts, a normal request also works:
 
 ```text
-Use the project-architect skill to review this project's architecture.
+Use the DocTrail skill to review this project's architecture.
 ```
 
 Hosts may select it automatically for architecture assessment, technical decisions, repository reviews, requirements-led project documentation, feature fit, and technical delivery planning. It should not activate merely because ordinary implementation begins.
@@ -347,7 +366,7 @@ Hosts may select it automatically for architecture assessment, technical decisio
 ## Inside the skill
 
 ```text
-project-architect/
+doctrail/
 ├── SKILL.md                       # Activation, shared behavior, routing
 ├── agents/
 │   └── openai.yaml               # Codex UI metadata
@@ -363,7 +382,7 @@ project-architect/
 │   └── existing-project-review.md
 ├── assets/                        # Architecture, functional, requirements, quality, and plan templates
 ├── scripts/                       # Structural documentation validator
-└── evals/                         # 18 adversarial behavior scenarios
+└── evals/                         # 19 adversarial behavior scenarios
 ```
 
 `SKILL.md` stays focused on shared rules and routing. Detailed guidance is loaded only when the request needs it, keeping unrelated context out of the conversation.
@@ -383,7 +402,7 @@ DocTrail deliberately does **not**:
 
 ## Validation
 
-The package passes the standard Codex skill validator. Its 18 adversarial scenarios cover:
+The package passes the standard Codex skill validator. Its 19 adversarial scenarios cover:
 
 - simple CRUD and accidental overengineering;
 - brownfield repository review;
@@ -401,8 +420,9 @@ The package passes the standard Codex skill validator. Its 18 adversarial scenar
 - proportional growth of documentation for a larger multi-unit product;
 - concise requirements and user stories without verbose conventional login use cases;
 - feature intake that keeps adjacent recommendations out of accepted scope.
+- explicit route selectors that do not grant permission to edit files.
 
-Run `python project-architect/scripts/validate_docs.py <docs-root>` for structural, link, and identifier checks on the default layout; run `python -m unittest discover -s tests -v` to test the validator. It does not judge whether requirements are true or semantically complete, so review source coverage and evidence manually. The evals judge observable decisions and side effects — not exact wording or a predetermined stack.
+Run `python doctrail/scripts/validate_docs.py <docs-root>` for structural, link, and identifier checks on the default layout; run `python -m unittest discover -s tests -v` to test the validator. It does not judge whether requirements are true or semantically complete, so review source coverage and evidence manually. The evals judge observable decisions and side effects — not exact wording or a predetermined stack.
 
 ---
 

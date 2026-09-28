@@ -2,7 +2,7 @@
 
 ## Exact prompt
 
-> Usa `$project-architect` para revisar si la dirección técnica de este repositorio coincide con nuestro roadmap de Linear. No copies el roadmap al repositorio y no modifiques nada; dime únicamente qué decisiones durables faltan o están desalineadas.
+> Usa `$doctrail` para revisar si la dirección técnica de este repositorio coincide con nuestro roadmap de Linear. No copies el roadmap al repositorio y no modifiques nada; dime únicamente qué decisiones durables faltan o están desalineadas.
 
 ## Fixture or available context
 

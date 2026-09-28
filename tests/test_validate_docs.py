@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 
 
-SCRIPT_DIR = Path(__file__).resolve().parents[1] / "project-architect" / "scripts"
+SCRIPT_DIR = Path(__file__).resolve().parents[1] / "doctrail" / "scripts"
 sys.path.insert(0, str(SCRIPT_DIR))
 
 import validate_docs  # noqa: E402

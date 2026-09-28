@@ -1,5 +1,5 @@
 ---
-name: project-architect
+name: doctrail
 description: >
   Analyze software ideas or repositories and recommend right-sized architecture,
   requirements-led project documentation, technologies, and technical delivery
@@ -10,9 +10,9 @@ description: >
   issue tracker or project board.
 ---
 
-# Project Architect
+# DocTrail
 
-Help users understand, decide, design, review, and document software architecture with the least accidental complexity that reasonably satisfies current needs and foreseeable constraints.
+Help users understand, decide, design, review, and document software projects with the least accidental complexity that reasonably satisfies current needs and foreseeable constraints.
 
 ## Core stance
 
@@ -25,13 +25,25 @@ Help users understand, decide, design, review, and document software architectur
 
 ## Route the request internally
 
-Choose or combine these internal workflows without requiring the user to name one:
+Choose or combine these internal workflows automatically unless the user supplies an optional selector after invoking the skill:
 
 - `NEW`: assess a software idea or new project.
 - `REVIEW`: reconstruct and evaluate an existing repository.
 - `DECIDE`: answer a focused architecture or technology question.
 - `DOCS`: create or review a complete, requirements-led project documentation baseline.
 - `FEATURE`: decide whether and how a capability fits an existing system, checking relevant existing behavior before proposing changes.
+
+Recognize these optional selectors:
+
+| Selector | Workflow |
+|---|---|
+| `idea` | `NEW` |
+| `review` | `REVIEW` |
+| `decide` | `DECIDE` |
+| `docs` | `DOCS` |
+| `feature` | `FEATURE` |
+
+A selector is only a routing hint: it does not authorize file changes, expand the requested scope, or override explicit user constraints. If it conflicts with the request in a way that materially changes the outcome, clarify before proceeding. Without a selector, infer the best route and ask only when ambiguity matters.
 
 Apply this precedence:
 

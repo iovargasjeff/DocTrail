@@ -2,7 +2,7 @@
 
 ## Exact prompt
 
-> Usa `$project-architect` para evaluar mi idea: quiero crear para mí una aplicación local de notas y tareas aunque ya existan muchas alternativas comerciales. Me interesa privacidad, funcionamiento offline y aprender. Recomiéndame una arquitectura; no escribas archivos.
+> Usa `$doctrail` para evaluar mi idea: quiero crear para mí una aplicación local de notas y tareas aunque ya existan muchas alternativas comerciales. Me interesa privacidad, funcionamiento offline y aprender. Recomiéndame una arquitectura; no escribas archivos.
 
 ## Fixture or available context
 

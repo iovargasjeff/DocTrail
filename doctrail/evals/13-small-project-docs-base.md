@@ -2,7 +2,7 @@
 
 ## Exact prompt
 
-> Usa `$project-architect` para crear una documentación base breve para este pequeño proyecto de lista de compras personal. Quiero que alguien pueda volver en seis meses y entender para qué sirve, qué hace, cómo está construido y cómo ejecutarlo/verificarlo. No quiero roadmap, milestones ni planificación formal.
+> Usa `$doctrail` para crear una documentación base breve para este pequeño proyecto de lista de compras personal. Quiero que alguien pueda volver en seis meses y entender para qué sirve, qué hace, cómo está construido y cómo ejecutarlo/verificarlo. No quiero roadmap, milestones ni planificación formal.
 
 ## Fixture or available context
 
