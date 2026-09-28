@@ -4,7 +4,7 @@ DocTrail uses an explicit first release followed by Release Please and npm Trust
 
 ## One-time setup
 
-1. Merge the package implementation to `main` through a pull request and wait for the `CI / Required` check.
+1. Merge the package implementation to `main` through a pull request and wait for the `Required` check from the `CI` workflow.
 2. From that merged commit, create and push the initial `v0.1.0` tag. Ensure `package.json` says `0.1.0` and run `npm run check` plus `npm pack --dry-run` first.
 3. Authenticate to npm locally, enable 2FA, and publish the first scoped public package with `npm publish --access public`. This is a one-time interactive publication; it is intentionally not run by this repository's automation.
 4. In npm package settings for `@iovargasjeff/doctrail`, configure a GitHub Actions Trusted Publisher for owner `iovargasjeff`, repository `DocTrail`, workflow filename `publish.yml`. Do not create a long-lived npm token.
@@ -39,6 +39,6 @@ Do not overwrite or silently unpublish a released version. If a version is unsaf
 - [ ] Publish v0.1.0 interactively with npm 2FA.
 - [ ] Configure the exact Trusted Publisher workflow, then verify the next release tag publishes with OIDC and provenance.
 - [ ] Configure the Release Please GitHub App and repository secrets.
-- [ ] Add `CI / Required` as a required main-branch status check after the workflow's first successful run.
+- [ ] Require the `Required` check from the `CI` workflow on `main` after its first successful run.
 
 Existing copies of the skill do not update when npm publishes a new version. Users explicitly run `npx --yes @iovargasjeff/doctrail@latest update` when they want to update.
