@@ -1,6 +1,6 @@
 {
   "name": "@iovargasjeff/doctrail",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Portable project architecture and documentation skill with a cross-platform CLI",
   "type": "module",
   "bin": {
