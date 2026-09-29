@@ -12,16 +12,16 @@
 <br />
 
 <strong>Compatible</strong><br />
-<code>Claude Code</code> · <code>Cursor</code> · <code>GitHub Copilot</code> · <code>Gemini CLI</code> · <code>OpenCode</code>
+<code>Claude Code</code> · <code>Cursor</code> · <code>GitHub Copilot</code> · <code>Gemini CLI</code> · <code>Grok Code</code> · <code>OpenCode</code>
 
 <br />
 
 <sub>One skill. Multiple agents. Portable core built on the open <a href="https://agentskills.io/specification">Agent Skills format</a>.</sub><br />
-<sub><strong>Verified</strong> means the package passed Codex's skill validator. <strong>Compatible</strong> means the host officially supports DocTrail's current <code>SKILL.md</code> package structure; those hosts are not yet in DocTrail's eval matrix.</sub>
+<sub><strong>Verified</strong> means the package passed Codex's skill validator. <strong>Compatible</strong> means the host documents support for this skill format or discovery path; it does not mean DocTrail's behavior has been tested on that host. Grok Code uses Grok Build's documented Agent Skills support and remains unverified behaviorally.</sub>
 
 <br />
 
-<sub><strong>Agent Skills compatible</strong> · ✓ Validated on Codex · 19 adversarial evals</sub>
+<sub><strong>Agent Skills compatible</strong> · ✓ Validated on Codex · 21 adversarial eval contracts</sub>
 
 [Why DocTrail](#why-doctrail) · [How it works](#how-it-works) · [Compare](#how-it-compares) · [Install](#installation) · [Try it](#try-it)
 
@@ -278,7 +278,7 @@ This installs DocTrail into the current project using the official Agent Skills 
 npx --yes @iovargasjeff/doctrail@latest install --global --agent codex
 ```
 
-The npm package is prepared here but is **not published yet**. The first public release is a one-time authenticated `v0.1.0` publish; see [the release guide](docs/releasing.md). After that initial release, the command above is the primary installation route.
+The public npm package is [`@iovargasjeff/doctrail`](https://www.npmjs.com/package/@iovargasjeff/doctrail), currently at `v0.1.1`. Automatic publishing is verified: the `v0.1.1` release was published through GitHub Actions using npm Trusted Publishing (OIDC). Future versions are proposed by Release Please and published after a reviewed release PR is merged; see [the release guide](docs/releasing.md).
 
 The bundled commands are:
 
@@ -322,7 +322,7 @@ cd DocTrail
 
 #### Shared Agent Skills path
 
-One installation in `.agents/skills/` is discovered by **Codex, Cursor, GitHub Copilot, Gemini CLI, and OpenCode**. Use the user path for all projects or the project path when the skill should travel with one repository.
+One project-scoped installation in `.agents/skills/` is discovered by **Codex, Cursor, GitHub Copilot, Gemini CLI, and OpenCode**. Grok Code discovers user-level skills in `~/.agents/skills/` and project skills in `.grok/skills/`; its host-specific paths are listed below.
 
 | Scope | Destination |
 |---|---|
@@ -377,6 +377,7 @@ The shared path is the smallest setup. These documented native locations are als
 | GitHub Copilot | `~/.copilot/skills/` or `~/.agents/skills/` | `.github/skills/` or `.agents/skills/` | [Adding agent skills](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills) |
 | Gemini CLI | `~/.gemini/skills/` or `~/.agents/skills/` | `.gemini/skills/` or `.agents/skills/` | [Managing Agent Skills](https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/using-agent-skills.md) |
 | OpenCode | `~/.config/opencode/skills/` or `~/.agents/skills/` | `.opencode/skills/` or `.agents/skills/` | [Agent Skills](https://opencode.ai/docs/skills) |
+| Grok Code (Grok Build) | `~/.grok/skills/` or `~/.agents/skills/` | `.grok/skills/` | [Skills, plugins, and marketplaces](https://docs.x.ai/build/features/skills-plugins-marketplaces) |
 
 `agents/openai.yaml` adds Codex presentation metadata only. The portable behavior lives in `SKILL.md`, `references/`, and `assets/`; other hosts can ignore the OpenAI metadata.
 
@@ -415,7 +416,7 @@ doctrail/
 │   └── existing-project-review.md
 ├── assets/                        # Architecture, functional, requirements, quality, and plan templates
 ├── scripts/                       # Documentation validator and read-only repository inventory
-└── evals/                         # 19 adversarial scenario contracts (repository only; not in npm package)
+└── evals/                         # 21 adversarial scenario contracts (repository only; not in npm package)
 ```
 
 `SKILL.md` stays focused on shared rules and routing. Detailed guidance is loaded only when the request needs it, keeping unrelated context out of the conversation.
@@ -435,7 +436,7 @@ DocTrail deliberately does **not**:
 
 ## Validation
 
-The skill passes structural validation. Its 19 adversarial scenario contracts cover:
+The skill passes structural validation. Its 21 adversarial scenario contracts cover:
 
 - simple CRUD and accidental overengineering;
 - brownfield repository review;
@@ -453,9 +454,11 @@ The skill passes structural validation. Its 19 adversarial scenario contracts co
 - proportional growth of documentation for a larger multi-unit product;
 - concise requirements and user stories without verbose conventional login use cases;
 - feature intake that keeps adjacent recommendations out of accepted scope.
-- explicit route selectors that do not grant permission to edit files.
+- explicit route selectors that do not grant permission to edit files;
+- broad brownfield review with bounded repository inventory;
+- safe host-native inventory fallback when Python is unavailable.
 
-Run `npm run check` for the skill/package checks and test suite, `npm run evals` to validate the 19 scenario contracts, and `python doctrail/scripts/validate_docs.py <docs-root>` for structural, link, and identifier checks on generated documentation. The repository inventory is available with `python doctrail/scripts/repository_inventory.py <repo-root> --format markdown|json`. Automated checks validate structure and deterministic script behavior; they do not run an LLM or prove that requirements are true, semantically complete, or behaviorally compatible with every host. Human review of source coverage and live host-specific evals remains necessary.
+Run `npm run check` for the skill/package checks and test suite, `npm run evals` to validate the 21 scenario contracts, and `python doctrail/scripts/validate_docs.py <docs-root>` for structural, link, and identifier checks on generated documentation. The repository inventory is available with `python doctrail/scripts/repository_inventory.py <repo-root> --format markdown|json`; if Python is unavailable during an agent review, use host-native file-listing tools and disclose that the helper did not run. Automated checks validate structure and deterministic script behavior; they do not run an LLM or prove that requirements are true, semantically complete, or behaviorally compatible with every host. Human review of source coverage and live host-specific evals remains necessary.
 
 ---
 

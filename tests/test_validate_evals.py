@@ -15,11 +15,22 @@ import validate_evals  # noqa: E402
 
 
 class ValidateEvalsTests(unittest.TestCase):
-    def test_current_nineteen_scenario_contracts_validate(self) -> None:
+    def test_current_twenty_one_scenario_contracts_validate(self) -> None:
         report = validate_evals.validate(ROOT / "doctrail" / "evals")
         self.assertEqual(report["status"], "passed", report["issues"])
-        self.assertEqual(report["scenario_count"], 19)
+        self.assertEqual(report["scenario_count"], 21)
         self.assertIn("not executed", report["scope"])
+
+    def test_inventory_success_and_python_fallback_scenarios_are_required(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            evals_root = Path(temp_dir) / "evals"
+            shutil.copytree(ROOT / "doctrail" / "evals", evals_root)
+            (evals_root / "20-review-inventory-success.md").unlink()
+            (evals_root / "21-review-inventory-python-unavailable.md").unlink()
+
+            report = validate_evals.validate(evals_root)
+            self.assertEqual(report["status"], "failed")
+            self.assertTrue(any("20, 21" in issue["issue"] for issue in report["issues"]))
 
     def test_reports_missing_behavioral_invariant_section(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
