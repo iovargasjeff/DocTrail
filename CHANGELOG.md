@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/iovargasjeff/DocTrail/compare/v0.1.1...v0.1.2) (2026-09-29)
+
+
+### Bug Fixes
+
+* complete deterministic inventory review coverage ([2686585](https://github.com/iovargasjeff/DocTrail/commit/2686585d97b0c60716439d797380f953a40869ef))
+
 ## [0.1.1](https://github.com/iovargasjeff/DocTrail/compare/v0.1.0...v0.1.1) (2026-09-29)
 
 
