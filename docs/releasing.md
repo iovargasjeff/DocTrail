@@ -1,17 +1,17 @@
 # Releasing DocTrail
 
-DocTrail uses an explicit first release followed by Release Please and npm Trusted Publishing. The public npm package `@iovargasjeff/doctrail@0.1.0` and Git tag `v0.1.0` already exist. The next automatic release has not yet been verified.
+DocTrail uses Release Please and npm Trusted Publishing. The public npm package is currently `@iovargasjeff/doctrail@0.1.1`; tags `v0.1.0` and `v0.1.1` exist. The automatic OIDC publication path was verified end to end with `v0.1.1`, and npm reports an SLSA provenance attestation for that version.
 
 ## Current automation status
 
 - [x] Publish the initial scoped package `@iovargasjeff/doctrail@0.1.0` interactively with npm authentication/2FA.
 - [x] Push the matching `v0.1.0` tag.
 - [x] Configure the npm GitHub Actions Trusted Publisher for owner `iovargasjeff`, repository `DocTrail`, workflow filename `publish.yml` (created via npm CLI; npm reports `publish` and `stage publish` permissions). Do not create a long-lived npm token.
-- [ ] Create a repository GitHub App dedicated to Release Please with only `Contents: read/write` and `Pull requests: read/write`; install it only on `iovargasjeff/DocTrail`.
-- [ ] Add repository Actions secrets `RELEASE_PLEASE_APP_ID` and `RELEASE_PLEASE_APP_PRIVATE_KEY`. The private key is used only to mint a short-lived installation token for the release workflow. Never paste it into chat or commit it.
-- [ ] Verify that the next release uses this exact workflow and publishes successfully through OIDC; then confirm npm provenance. The trust relationship is configured, but end-to-end publishing is not yet tested.
+- [x] Create a repository GitHub App dedicated to Release Please with only `Contents: read/write` and `Pull requests: read/write`; install it only on `iovargasjeff/DocTrail`.
+- [x] Add repository Actions secrets `RELEASE_PLEASE_APP_ID` and `RELEASE_PLEASE_APP_PRIVATE_KEY`. The private key is used only to mint a short-lived installation token for the release workflow. Never paste it into chat or commit it.
+- [x] Verify the `v0.1.1` release workflow and npm OIDC publication; confirm npm records version `0.1.1` and its SLSA provenance attestation.
 
-The initial `v0.1.0` tag deliberately does not trigger `publish.yml`: the first publish created the npm package record before Trusted Publisher configuration. Later version tags should publish through OIDC.
+The initial `v0.1.0` tag deliberately does not trigger `publish.yml`: the first publish created the npm package record before Trusted Publisher configuration. The later `v0.1.1` tag successfully triggered `publish.yml` and published through OIDC.
 
 ## Routine releases
 
@@ -23,7 +23,7 @@ Use Conventional Commits for changes, including skill instruction changes:
 
 After changes reach `main`, Release Please opens or updates a release PR with the version and changelog. Review and merge that PR manually. The generated version tag triggers CI and then `publish.yml`; the workflow checks that `vX.Y.Z` matches `package.json`, reruns the quality/package checks, and runs `npm publish --access public` with OIDC. No ordinary commit is published, and release PRs are never auto-merged.
 
-If the App secrets have not been configured, Release Please cannot create its authenticated PR and the workflow will fail at the token step. Configure both secrets before expecting automatic release PRs. The publish workflow never falls back to a stored npm token.
+Release Please uses the repository App secrets to mint a short-lived token. The publish workflow uses npm OIDC and never falls back to a stored npm token.
 
 ## Rollback
 
@@ -34,7 +34,7 @@ Do not overwrite or silently unpublish a released version. If a version is unsaf
 - [ ] `npm run check` passes on Windows, macOS, and Linux.
 - [ ] `npm pack --dry-run` contains only the README, license, CLI, banner used by the README, and installable skill files; no evals, tests, caches, or lockfile.
 - [ ] The package's bundled skill has the expected `doctrail` slug and all local references resolve.
-- [ ] `Required` is required on `main`.
-- [ ] After one reviewed Release Please PR is merged, the matching version tag triggers `publish.yml` and npm records the expected version/provenance.
+- [x] `Required` is required on `main` (verified in branch protection settings).
+- [x] Verified once: merging the reviewed `v0.1.1` Release Please PR created the matching version tag, triggered `publish.yml`, and published npm version `0.1.1` with provenance.
 
 Existing copies of the skill do not update when npm publishes a new version. Users explicitly run `npx --yes @iovargasjeff/doctrail@latest update` when they want to update.
