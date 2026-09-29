@@ -25,7 +25,7 @@ REQUIRED_SECTIONS = (
     "Observable pass criteria",
 )
 REQUIRED_ORIGINAL_IDS = set(range(1, 13))
-REQUIRED_ADDITION_IDS = set(range(13, 20))
+REQUIRED_ADDITION_IDS = set(range(13, 22))
 
 
 def _sections(text: str) -> dict[str, str]:
@@ -41,7 +41,7 @@ def _sections(text: str) -> dict[str, str]:
     return {key: "\n".join(lines).strip() for key, lines in result.items()}
 
 
-def validate(evals_root: Path, *, minimum: int = 19) -> dict[str, Any]:
+def validate(evals_root: Path, *, minimum: int = 21) -> dict[str, Any]:
     issues: list[dict[str, str]] = []
     if not evals_root.is_dir():
         return {
@@ -115,7 +115,7 @@ def validate(evals_root: Path, *, minimum: int = 19) -> dict[str, Any]:
     missing_additions = sorted(REQUIRED_ADDITION_IDS - set(found_ids))
     if missing_additions:
         rendered = ", ".join(f"{value:02d}" for value in missing_additions)
-        issues.append({"path": str(evals_root), "issue": f"current expansion scenarios 13–19 are required; missing: {rendered}"})
+        issues.append({"path": str(evals_root), "issue": f"current expansion scenarios 13–21 are required; missing: {rendered}"})
 
     guide = evals_root / "README.md"
     if not guide.is_file() or not guide.read_text(encoding="utf-8-sig").strip():
@@ -157,7 +157,7 @@ def render_markdown(report: dict[str, Any]) -> str:
 def main(argv: Optional[list[str]] = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("evals_root", nargs="?", type=Path, default=Path(__file__).resolve().parents[1] / "evals")
-    parser.add_argument("--minimum", type=int, default=19, help="minimum number of scenario contracts required")
+    parser.add_argument("--minimum", type=int, default=21, help="minimum number of scenario contracts required")
     parser.add_argument("--format", choices=("markdown", "json"), default="markdown")
     args = parser.parse_args(argv)
     if args.minimum < 1:
