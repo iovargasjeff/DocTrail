@@ -6,10 +6,10 @@ DocTrail uses an explicit first release followed by Release Please and npm Trust
 
 - [x] Publish the initial scoped package `@iovargasjeff/doctrail@0.1.0` interactively with npm authentication/2FA.
 - [x] Push the matching `v0.1.0` tag.
-- [ ] In npm package settings, configure a GitHub Actions Trusted Publisher for owner `iovargasjeff`, repository `DocTrail`, workflow filename `publish.yml`. Do not create a long-lived npm token.
+- [x] Configure the npm GitHub Actions Trusted Publisher for owner `iovargasjeff`, repository `DocTrail`, workflow filename `publish.yml` (created via npm CLI; npm reports `publish` and `stage publish` permissions). Do not create a long-lived npm token.
 - [ ] Create a repository GitHub App dedicated to Release Please with only `Contents: read/write` and `Pull requests: read/write`; install it only on `iovargasjeff/DocTrail`.
 - [ ] Add repository Actions secrets `RELEASE_PLEASE_APP_ID` and `RELEASE_PLEASE_APP_PRIVATE_KEY`. The private key is used only to mint a short-lived installation token for the release workflow. Never paste it into chat or commit it.
-- [ ] Verify the npm publisher points at exactly `.github/workflows/publish.yml` and test an end-to-end subsequent release. npm Trusted Publishing can attach provenance when the workflow and package are configured correctly.
+- [ ] Verify that the next release uses this exact workflow and publishes successfully through OIDC; then confirm npm provenance. The trust relationship is configured, but end-to-end publishing is not yet tested.
 
 The initial `v0.1.0` tag deliberately does not trigger `publish.yml`: the first publish created the npm package record before Trusted Publisher configuration. Later version tags should publish through OIDC.
 
