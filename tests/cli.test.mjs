@@ -10,6 +10,7 @@ import { hashSkillTree, parseArgs } from "../cli/doctrail.mjs";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const cli = join(root, "cli", "doctrail.mjs");
+const packageVersion = JSON.parse(await readFile(join(root, "package.json"), "utf8")).version;
 
 function runCli(args, cwd, extraEnv = {}) {
   return spawnSync(process.execPath, [cli, ...args], {
@@ -85,7 +86,7 @@ test("install, doctor, safe update, forced update, and uninstall are scoped to D
   assert.equal((await readFile(installedSkill, "utf8")).includes("# DocTrail"), true);
   const statePath = join(skillDir, ".doctrail-install.json");
   const state = JSON.parse(await readFile(statePath, "utf8"));
-  assert.equal(state.packageVersion, "0.1.0");
+  assert.equal(state.packageVersion, packageVersion);
 
   const repeatedInstall = runCli(["install", "--project", "--agent", "codex", "--yes"], workspace);
   assert.equal(repeatedInstall.status, 0, repeatedInstall.stderr);
@@ -109,7 +110,7 @@ test("install, doctor, safe update, forced update, and uninstall are scoped to D
   const update = runCli(["update", "--project", "--agent", "codex", "--force"], workspace);
   assert.equal(update.status, 0, `${update.stdout}\n${update.stderr}`);
   assert.equal((await readdir(skillDir)).includes("local-notes.md"), false);
-  assert.equal(JSON.parse(await readFile(statePath, "utf8")).packageVersion, "0.1.0");
+  assert.equal(JSON.parse(await readFile(statePath, "utf8")).packageVersion, packageVersion);
 
   const otherSkill = join(workspace, ".agents", "skills", "other-skill");
   await mkdir(otherSkill, { recursive: true });
