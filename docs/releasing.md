@@ -1,6 +1,6 @@
 # Releasing DocTrail
 
-DocTrail uses Release Please and npm Trusted Publishing. The public npm package is currently `@iovargasjeff/doctrail@0.1.1`; tags `v0.1.0` and `v0.1.1` exist. The automatic OIDC publication path was verified end to end with `v0.1.1`, and npm reports an SLSA provenance attestation for that version.
+DocTrail uses Release Please and npm Trusted Publishing. The latest package version is shown on the [npm package page](https://www.npmjs.com/package/@iovargasjeff/doctrail). The `v0.1.1` release verified the automatic OIDC publication path end to end, and npm reported an SLSA provenance attestation for that version.
 
 ## Current automation status
 
