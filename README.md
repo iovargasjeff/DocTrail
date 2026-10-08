@@ -278,7 +278,7 @@ This installs DocTrail into the current project using the official Agent Skills 
 npx --yes @iovargasjeff/doctrail@latest install --global --agent codex
 ```
 
-The public npm package is [`@iovargasjeff/doctrail`](https://www.npmjs.com/package/@iovargasjeff/doctrail), currently at `v0.1.1`. Automatic publishing is verified: the `v0.1.1` release was published through GitHub Actions using npm Trusted Publishing (OIDC). Future versions are proposed by Release Please and published after a reviewed release PR is merged; see [the release guide](docs/releasing.md).
+The public npm package is [`@iovargasjeff/doctrail`](https://www.npmjs.com/package/@iovargasjeff/doctrail). Automatic publishing is verified: GitHub Actions published `v0.1.1` using npm Trusted Publishing (OIDC). Release Please proposes new versions, which are published after a reviewed release PR is merged; see [the release guide](docs/releasing.md).
 
 The bundled commands are:
 
